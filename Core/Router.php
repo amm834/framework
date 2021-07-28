@@ -8,7 +8,8 @@ use Closure;
 class Router
 {
     protected array $routes = [];
-    public Request $request;
+    protected Request $request;
+
 
     /**
      * Router constructor.
@@ -19,20 +20,48 @@ class Router
         $this->request = $request;
     }
 
-    public function get(string $path,string|Closure $callback)
+    public function get(string $path, string|Closure $callback)
     {
         $this->routes['get'][$path] = $callback;
     }
 
-    public function resolve() : void
+    public function resolve()
     {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
-        if ($callback === false){
-            echo "404 | Page Not Found";
-            exit();
+        // exit if callback is not valid
+        if (!$callback) {
+            return "404 | Page Not Found";
         }
-       echo  call_user_func($callback);
+
+        // return views file
+        if (is_string($callback)) {
+            return $this->renderView($callback);
+        }
+
+        return call_user_func($callback);
+    }
+
+    protected function renderView($view)
+    {
+        $layoutContent = $this->renderLayoutContent();
+        $viewContent = $this->renderOnlyView($view);
+        return str_replace("{{content}}",$viewContent,$layoutContent);
+
+    }
+
+    protected function renderLayoutContent()
+    {
+        ob_start();
+        include_once Application::$ROOT_DIR . "/views/main.php";
+        return ob_get_clean();
+    }
+
+    protected function renderOnlyView($view)
+    {
+        ob_start();
+        include_once Application::$ROOT_DIR."/views/$view.php";
+        return ob_get_clean();
     }
 }
