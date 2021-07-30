@@ -6,10 +6,13 @@ namespace App\Core;
 
 class Request
 {
-    public function getPath() : string
+    /**
+     * @return mixed|string
+     */
+    public function getPath()
     {
         $url = $_SERVER['REQUEST_URI'] ?? '/';
-        $position = strpos($url, '?');
+        $position = strpos(haystack: $url, needle: '?');
         if ($position === false) {
             return $url;
         }
@@ -20,4 +23,5 @@ class Request
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
+
 }
