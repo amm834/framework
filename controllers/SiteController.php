@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Core\Application;
 use App\Core\Controller;
+use App\Core\Request;
 
 class SiteController extends Controller
 {
@@ -16,5 +17,12 @@ class SiteController extends Controller
             "type"=>"Education"
         ];
         return $this->render( 'home',$params);
+    }
+
+    public function handleContact(Request $request)
+    {
+        $body = $request->getBody();
+        print_r($body);
+
     }
 }

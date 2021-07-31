@@ -9,6 +9,8 @@ $rootDir = dirname(__DIR__);
 $app = new Application($rootDir);
 
 $app->router->get('/',[SiteController::class,'home']);
+$app->router->get('/contact','contact');
+$app->router->post('/contact',[SiteController::class,'handleContact']);
 
 
 $app->run();

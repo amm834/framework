@@ -28,7 +28,7 @@ class Router
         $this->routes['get'][$path] = $callback;
     }
 
-    public function post(string $path, string|Closure $callback)
+    public function post(string $path, string|Closure|array $callback)
     {
         $this->routes['post'][$path] = $callback;
     }
@@ -54,8 +54,8 @@ class Router
             // invoke class itself
             $callback[0] = new $callback[0]();
         }
-
-        return call_user_func($callback);
+    // call the function
+        return $callback($this->request);
     }
 
     /**
