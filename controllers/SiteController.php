@@ -5,14 +5,16 @@ namespace App\Controllers;
 
 
 use App\Core\Application;
+use App\Core\Controller;
 
-class SiteController
+class SiteController extends Controller
 {
     public  function home()
     {
         $params = [
-            "name"=>"Web Dev Env"
+            "name"=>"Web Dev Env",
+            "type"=>"Education"
         ];
-        return Application::$app->router->renderView('home',$params);
+        return $this->render( 'home',$params);
     }
 }

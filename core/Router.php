@@ -55,7 +55,7 @@ class Router
             $callback[0] = new $callback[0]();
         }
 
-        return $callback();
+        return call_user_func($callback);
     }
 
     /**
