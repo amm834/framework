@@ -13,6 +13,8 @@ class Application
     public Router $router;
     public Request $request;
     public Response $response;
+    public Controller $controller;
+
     public static string $ROOT_DIR;
     /**
      * Application constructor.
@@ -20,6 +22,7 @@ class Application
      public function __construct (string $rootPath)
     {
         self::$app = $this;
+        $this->controller = new Controller();
         self::$ROOT_DIR = $rootPath;
         $this->request = $this->request = new Request();
         $this->response = new Response();
@@ -27,7 +30,7 @@ class Application
 
     }
 
-    public function run()
+    public function run(): void
     {
         echo $this?->router?->resolve();
     }

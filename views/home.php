@@ -1,1 +1,1 @@
-<h1>Home View of <?php echo $name; ?></h1>
+<h1 class="text-center">Home View of <?php echo $name; ?></h1>
