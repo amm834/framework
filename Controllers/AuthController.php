@@ -22,6 +22,12 @@ class AuthController extends Controller
             return "Get Method Not Allowed";
         }
         $registerModel = new RegisterModel();
-        print_r($request->getBody());
+        $registerModel->loadData($request->getBody());
+
+        if ($registerModel->validate()) {
+            return  "success";
+        }
+        echo "<pre>";
+        print_r($registerModel->errors);
     }
 }
