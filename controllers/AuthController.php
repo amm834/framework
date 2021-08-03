@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\Request;
+use App\Models\RegisterModel;
 
 class AuthController extends Controller
 {
@@ -17,7 +18,10 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $body = $request->getBody();
-        print_r($body);
+        if (!$request->isPost()) {
+            return "Get Method Not Allowed";
+        }
+        $registerModel = new RegisterModel();
+        print_r($request->getBody());
     }
 }
