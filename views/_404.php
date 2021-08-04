@@ -1,1 +1,1 @@
-<h1 class="text-center display-3 mt-5">404 | Page Not Found</h1>
+<h1 class="text-center display-3 mt-5 text-black-50">404 | Page Not Found</h1>

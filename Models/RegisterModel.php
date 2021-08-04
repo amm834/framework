@@ -9,10 +9,10 @@ use JetBrains\PhpStorm\ArrayShape;
 
 class RegisterModel extends Model
 {
-    public string $username;
-    public string $email;
-    public string $password;
-    public string $passwordConfirm;
+    public string $username = '';
+    public string $email = '';
+    public string $password = '';
+    public string $passwordConfirm ='';
 
 
     #[ArrayShape(['username' => "array", 'email' => "array", 'password' => "array", 'passwordConfirm' => "array"])] function rules(): array

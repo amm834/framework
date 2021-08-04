@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# Serve the project
+# Copyright 2021 Aung Myat Moe
+
+boot() {
+  if [ $(command -v php) ]; then
+    echo -e "\e[31mProject is serving at http://localhost:8000\e[0m"
+    # shellcheck disable=SC2210
+    php -S localhost:8000 -t public/
+  fi
+}
+
+function main() {
+  case $1 in
+  'serve')
+    boot
+    ;;
+  esac
+}
+
+main "$@"
