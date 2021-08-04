@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Core\Model;
+use JetBrains\PhpStorm\ArrayShape;
 
 class RegisterModel extends Model
 {
@@ -14,7 +15,7 @@ class RegisterModel extends Model
     public string $passwordConfirm;
 
 
-    function rules(): array
+    #[ArrayShape(['username' => "array", 'email' => "array", 'password' => "array", 'passwordConfirm' => "array"])] function rules(): array
     {
         // rules implementation for the register model
         return [

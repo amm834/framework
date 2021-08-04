@@ -12,7 +12,7 @@ $app = new Application($rootDir);
 $app->router->get('/', [SiteController::class, 'home']);
 $app->router->get('/contact', 'contact');
 $app->router->post('/contact', [SiteController::class, 'handleContact']);
-$app->router->get('/register', [AuthController::class, 'index']);
+$app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
 
 

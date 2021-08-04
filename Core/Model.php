@@ -4,6 +4,8 @@
 namespace App\Core;
 
 
+use JetBrains\PhpStorm\ArrayShape;
+
 abstract class Model
 {
     public const RULE_REQUIRED = 'required';
@@ -65,7 +67,7 @@ abstract class Model
     }
 
     // choose error
-    private function addError(string $attribute, string $rule, array $params = [])
+    private function addError(string $attribute, string $rule, array $params = []): void
     {
         // choose message base on rule
         $message = $this->errorMessage()[$rule] ?? '';
@@ -76,7 +78,7 @@ abstract class Model
         $this->errors[$attribute][] = $message;
     }
 
-    public function errorMessage(): array
+    #[ArrayShape([self::RULE_REQUIRED => "string", self::RULE_EMAIL => "string", self::RULE_MIN => "string", self::RULE_MAX => "string", self::RULE_MATCH => "string"])] public function errorMessage(): array
     {
         return [
             self::RULE_REQUIRED => 'This field is required',
@@ -85,5 +87,15 @@ abstract class Model
             self::RULE_MAX => 'This field must has maximum {max} characters',
             self::RULE_MATCH => 'This field must be same as {match} field'
         ];
+    }
+
+    public function hasError($attribute)
+    {
+        return $this->errors[$attribute] ?? false;
+    }
+
+    public function getFirstError($attribute)
+    {
+        return $this->errors[$attribute][0] ?? false;
     }
 }
